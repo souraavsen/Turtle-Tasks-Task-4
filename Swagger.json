@@ -1,0 +1,177 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Turtle-Venture-Task API",
+    "description": "Turtle-Venture-Task API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Station",
+      "description": "Stations API"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Station"],
+        "summary": "Request home",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/stations": {
+      "get": {
+        "tags": ["Station"],
+        "summary": "Request all stations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        }
+      }
+    },
+
+    "/add-station": {
+      "post": {
+        "tags": ["Station"],
+        "summary": "Request Create Station API",
+        "parameters": [
+          {
+            "name": "Station Details",
+            "in": "body",
+            "description": "Station Details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+
+    "/update-station/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Station Id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "tags": ["Station"],
+        "summary": "Update update-station API",
+        "parameters": [
+          {
+            "name": "station_name",
+            "in": "body",
+            "description": "Station Name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        }
+      }
+    },
+    "/station/{id}": {
+      "get": {
+        "tags": ["Station"],
+        "summary": "Station Details API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Station Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        }
+      }
+    },
+
+    "/remove-station/{id}": {
+      "delete": {
+        "tags": ["Station"],
+        "summary": "Delete Station API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Station Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Station"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Station": {
+      "required": ["station_name", "freq"],
+      "properties": {
+        "station_name": {
+          "type": "string"
+        },
+        "freq": {
+          "type": "number"
+        },
+        "img": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
